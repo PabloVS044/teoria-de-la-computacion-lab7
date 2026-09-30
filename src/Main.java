@@ -19,6 +19,25 @@ public class Main {
             System.out.println(n + "," + ms + "," + AlgoritmoB.ops + "," + AlgoritmoB.formula(n));
         }
 
+        // Sobre este tamano el tiempo real de (a) es demasiado largo: solo se calcula la formula
+        final int LIMITE_A = 10000;
+
+        System.out.println();
+        System.out.println("Algoritmo A");
+        System.out.println("n,tiempo_ms,ops,formula,formula_companero,medido");
+        for (int n : TAMANOS) {
+            if (n <= LIMITE_A) {
+                long inicio = System.nanoTime();
+                AlgoritmoA.function(n);
+                double ms = (System.nanoTime() - inicio) / 1e6;
+                System.out.println(n + "," + ms + "," + AlgoritmoA.ops + "," + AlgoritmoA.formula(n)
+                        + "," + AlgoritmoA.formulaCompanero(n) + ",true");
+            } else {
+                System.out.println(n + ",," + AlgoritmoA.formula(n) + "," + AlgoritmoA.formula(n)
+                        + "," + AlgoritmoA.formulaCompanero(n) + ",false");
+            }
+        }
+
         System.out.println();
         System.out.println("Algoritmo C");
         System.out.println("n,tiempo_ms,ops,formula,formula_companero");
